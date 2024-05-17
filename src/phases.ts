@@ -2419,7 +2419,7 @@ export class MovePhase extends BattlePhase {
     if (this.move.getMove().getAttrs(ChargeAttr).length) {
       const lastMove = this.pokemon.getLastXMoves() as TurnMove[];
       if (!lastMove.length || lastMove[0].move !== this.move.getMove().id || lastMove[0].result !== MoveResult.OTHER){
-        this.scene.queueMessage(getPokemonMessage(this.pokemon, ` used\n${this.move.getName()}!`), 500);
+        this.scene.queueMessage(getPokemonMessage(this.pokemon, `${i18next.t("battle:usedMove",{moveNameStr:this.move.getName()})}`), 500);
         return;
       }
     }
@@ -2427,7 +2427,7 @@ export class MovePhase extends BattlePhase {
     if (this.pokemon.getTag(BattlerTagType.RECHARGING || BattlerTagType.INTERRUPTED))
       return;
     
-    this.scene.queueMessage(getPokemonMessage(this.pokemon, ` used\n${this.move.getName()}!`), 500);
+    this.scene.queueMessage(getPokemonMessage(this.pokemon,`${i18next.t("battle:usedMove",{moveNameStr:this.move.getName()})}`), 500);
     applyMoveAttrs(PreMoveMessageAttr, this.pokemon, this.pokemon.getOpponents().find(() => true), this.move.getMove());
   }
 
@@ -3214,7 +3214,7 @@ export class FaintPhase extends PokemonPhase {
   doFaint(): void {
     const pokemon = this.getPokemon();
 
-    this.scene.queueMessage(getPokemonMessage(pokemon, ' fainted!'), null, true);
+    this.scene.queueMessage(getPokemonMessage(pokemon, i18next.t('battle:fainted')), null, true);
 
     if (pokemon.turnData?.attacksReceived?.length) {
       const lastAttack = pokemon.turnData.attacksReceived[0];
