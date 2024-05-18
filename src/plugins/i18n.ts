@@ -43,7 +43,19 @@ export interface ModifierTypeTranslationEntries {
   BaseStatBoosterItem: SimpleTranslationEntries,
   EvolutionItem: SimpleTranslationEntries,
   FormChangeItem: SimpleTranslationEntries,
-  TeraType: SimpleTranslationEntries,
+}
+export interface PokemonInfoTranslationEntries {
+  Stat: SimpleTranslationEntries,
+  Type: SimpleTranslationEntries,
+}
+
+export interface BerryTranslationEntry {
+  name: string,
+  effect: string
+}
+
+export interface BerryTranslationEntries {
+  [key: string]: BerryTranslationEntry
 }
 
 export interface Localizable {
@@ -82,7 +94,7 @@ export function initI18n(): void {
   i18next.use(LanguageDetector).init({
     lng: lang,
     fallbackLng: 'en',
-    supportedLngs: ['en', 'es', 'fr', 'it', 'de', 'zh_CN', 'pt_BR'],
+    supportedLngs: ['en', 'es', 'fr', 'it', 'de', 'zh_CN','pt_BR'],
     debug: true,
     interpolation: {
       escapeValue: false,
@@ -125,7 +137,7 @@ declare module 'i18next' {
       ability: AbilityTranslationEntries;
       pokeball: SimpleTranslationEntries;
       pokemon: SimpleTranslationEntries;
-      pokemonStat: SimpleTranslationEntries;
+      pokemonInfo: PokemonInfoTranslationEntries;
       commandUiHandler: SimpleTranslationEntries;
       fightUiHandler: SimpleTranslationEntries;
       titles: SimpleTranslationEntries;
@@ -139,8 +151,8 @@ declare module 'i18next' {
       egg: SimpleTranslationEntries;
       weather: SimpleTranslationEntries;
       modifierType: ModifierTypeTranslationEntries;
-      berry: SimpleTranslationEntries;
-      modifierSelectUiHandler: SimpleTranslationEntries;
+      battleMessageUiHandler: SimpleTranslationEntries;
+      berry: BerryTranslationEntries;
     };
   }
 }

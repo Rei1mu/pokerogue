@@ -22,33 +22,12 @@ export enum BerryType {
   LEPPA
 }
 
-export function getBerryName(berryType: BerryType) {
-  return i18next.t('berry:Berry', { berryTypeString: Utils.toReadableString(BerryType[berryType]) });
-  // i18next.t('battle:multiWildAppeared', {pokemonName1: enemyField[0].name, pokemonName2: enemyField[1].name})
+export function getBerryName(berryType: BerryType): string {
+  return i18next.t(`berry:${BerryType[berryType]}.name`);
 }
 
-export function getBerryEffectDescription(berryType: BerryType) {
-  switch (berryType) {
-    case BerryType.SITRUS:
-      return i18next.t('berry:Restores_25%_HP_if_HP_is_below_50%');
-    case BerryType.LUM:
-      return i18next.t('berry:Cures_any_non-volatile_status_condition_and_confusion');
-    case BerryType.ENIGMA:
-      return i18next.t('berry:Restores_25%_HP_if_hit_by_a_super_effective_move');
-    case BerryType.LIECHI:
-    case BerryType.GANLON:
-    case BerryType.PETAYA:
-    case BerryType.APICOT:
-    case BerryType.SALAC:
-      const stat = (berryType - BerryType.LIECHI) as BattleStat;
-      return i18next.t('berry:Raises', { battleStatName: getBattleStatName(stat) });
-    case BerryType.LANSAT:
-      return +i18next.t('berry:Raises_critical_hit_ratio_if_HP_is_below_25%');
-    case BerryType.STARF:
-      return +i18next.t('berry:Sharply_raises_a_random_stat_if_HP_is_below_25%');
-    case BerryType.LEPPA:
-      return +i18next.t('berry:Restores_10_PP_to_a_move_if_its_PP_reaches_0');
-  }
+export function getBerryEffectDescription(berryType: BerryType): string {
+  return i18next.t(`berry:${BerryType[berryType]}.effect`);
 }
 
 export type BerryPredicate = (pokemon: Pokemon) => boolean;
