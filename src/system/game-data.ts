@@ -127,7 +127,7 @@ interface VoucherUnlocks {
 }
 
 export interface VoucherCounts {
-	[type: string]: integer;
+  [type: string]: integer;
 }
 
 export interface DexData {
@@ -168,7 +168,7 @@ export const AbilityAttr = {
   ABILITY_HIDDEN: 4
 }
 
-export type StarterMoveset = [ Moves ] | [ Moves, Moves ] | [ Moves, Moves, Moves ] | [ Moves, Moves, Moves, Moves ];
+export type StarterMoveset = [Moves] | [Moves, Moves] | [Moves, Moves, Moves] | [Moves, Moves, Moves, Moves];
 
 export interface StarterFormMoveData {
   [key: integer]: StarterMoveset
@@ -179,7 +179,7 @@ export interface StarterMoveData {
 }
 
 export interface StarterDataEntry {
-  moveset: StarterMoveset | StarterFormMoveData; 
+  moveset: StarterMoveset | StarterFormMoveData;
   eggMoves: integer;
   candyCount: integer;
   friendship: integer;
@@ -201,7 +201,7 @@ const systemShortKeys = {
   seenAttr: '$sa',
   caughtAttr: '$ca',
   natureAttr: '$na',
-  seenCount: '$s' ,
+  seenCount: '$s',
   caughtCount: '$c',
   hatchedCount: '$hc',
   ivs: '$i',
@@ -222,7 +222,7 @@ export class GameData {
   public secretId: integer;
 
   public gender: PlayerGender;
-  
+
   public dexData: DexData;
   private defaultDexData: DexData;
 
@@ -399,7 +399,7 @@ export class GameData {
 
           this.migrateStarterAbilities(systemData, this.starterData);
         } else {
-          if ([ '1.0.0', '1.0.1' ].includes(systemData.gameVersion))
+          if (['1.0.0', '1.0.1'].includes(systemData.gameVersion))
             this.migrateStarterAbilities(systemData);
           //this.fixVariantData(systemData);
           this.fixStarterData(systemData);
@@ -428,7 +428,7 @@ export class GameData {
           for (let a of Object.keys(systemData.achvUnlocks)) {
             if (achvs.hasOwnProperty(a))
               this.achvUnlocks[a] = systemData.achvUnlocks[a];
-          } 
+          }
         }
 
         if (systemData.voucherUnlocks) {
@@ -484,7 +484,7 @@ export class GameData {
         return ret;
       }
 
-      return k.endsWith('Attr') && ![ 'natureAttr', 'abilityAttr', 'passiveAttr' ].includes(k) ? BigInt(v) : v;
+      return k.endsWith('Attr') && !['natureAttr', 'abilityAttr', 'passiveAttr'].includes(k) ? BigInt(v) : v;
     }) as SystemSaveData;
   }
 
@@ -503,7 +503,7 @@ export class GameData {
 
   public async verify(): Promise<boolean> {
     if (bypassLogin)
-        return true;
+      return true;
 
     const response = await Utils.apiPost(`savedata/system/verify`, JSON.stringify({ clientSessionId: clientSessionId }), undefined, true)
       .then(response => response.json());
@@ -550,7 +550,7 @@ export class GameData {
       return false;
 
     const settings = JSON.parse(localStorage.getItem('settings'));
-
+    
     for (let setting of Object.keys(settings))
       setSetting(this.scene, setting as Setting, settings[setting]);
   }
@@ -945,7 +945,7 @@ export class GameData {
             break;
         }
         const encryptedData = AES.encrypt(dataStr, saveKey);
-        const blob = new Blob([ encryptedData.toString() ], {type: 'text/json'});
+        const blob = new Blob([encryptedData.toString()], { type: 'text/json' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = `${dataKey}.prsv`;
@@ -980,7 +980,7 @@ export class GameData {
     let saveFile: any = document.getElementById('saveFile');
     if (saveFile)
       saveFile.remove();
-  
+
     saveFile = document.createElement('input');
     saveFile.id = 'saveFile';
     saveFile.type = 'file';
@@ -991,76 +991,76 @@ export class GameData {
         let reader = new FileReader();
 
         reader.onload = (_ => {
-            return e => {
-              let dataStr = AES.decrypt(e.target.result.toString(), saveKey).toString(enc.Utf8);
-              let valid = false;
-              try {
-                switch (dataType) {
-                  case GameDataType.SYSTEM:
-                    dataStr = this.convertSystemDataStr(dataStr);
-                    const systemData = this.parseSystemData(dataStr);
-                    valid = !!systemData.dexData && !!systemData.timestamp;
-                    break;
-                  case GameDataType.SESSION:
-                    const sessionData = this.parseSessionData(dataStr);
-                    valid = !!sessionData.party && !!sessionData.enemyParty && !!sessionData.timestamp;
-                    break;
-                  case GameDataType.SETTINGS:
-                  case GameDataType.TUTORIALS:
-                    valid = true;
-                    break;
-                }
-              } catch (ex) {
-                console.error(ex);
-              }
-
-              let dataName: string;
+          return e => {
+            let dataStr = AES.decrypt(e.target.result.toString(), saveKey).toString(enc.Utf8);
+            let valid = false;
+            try {
               switch (dataType) {
                 case GameDataType.SYSTEM:
-                  dataName = 'save';
+                  dataStr = this.convertSystemDataStr(dataStr);
+                  const systemData = this.parseSystemData(dataStr);
+                  valid = !!systemData.dexData && !!systemData.timestamp;
                   break;
                 case GameDataType.SESSION:
-                  dataName = 'session';
+                  const sessionData = this.parseSessionData(dataStr);
+                  valid = !!sessionData.party && !!sessionData.enemyParty && !!sessionData.timestamp;
                   break;
                 case GameDataType.SETTINGS:
-                  dataName = 'settings';
-                  break;
                 case GameDataType.TUTORIALS:
-                  dataName = 'tutorials';
+                  valid = true;
                   break;
               }
+            } catch (ex) {
+              console.error(ex);
+            }
 
-              const displayError = (error: string) => this.scene.ui.showText(error, null, () => this.scene.ui.showText(null, 0), Utils.fixedInt(1500));
+            let dataName: string;
+            switch (dataType) {
+              case GameDataType.SYSTEM:
+                dataName = 'save';
+                break;
+              case GameDataType.SESSION:
+                dataName = 'session';
+                break;
+              case GameDataType.SETTINGS:
+                dataName = 'settings';
+                break;
+              case GameDataType.TUTORIALS:
+                dataName = 'tutorials';
+                break;
+            }
 
-              if (!valid)
-                return this.scene.ui.showText(`Your ${dataName} data could not be loaded. It may be corrupted.`, null, () => this.scene.ui.showText(null, 0), Utils.fixedInt(1500));
-              this.scene.ui.showText(`Your ${dataName} data will be overridden and the page will reload. Proceed?`, null, () => {
-                this.scene.ui.setOverlayMode(Mode.CONFIRM, () => {
-                  localStorage.setItem(dataKey, encrypt(dataStr, bypassLogin));
+            const displayError = (error: string) => this.scene.ui.showText(error, null, () => this.scene.ui.showText(null, 0), Utils.fixedInt(1500));
 
-                  if (!bypassLogin && dataType < GameDataType.SETTINGS) {
-                    updateUserInfo().then(success => {
-                      if (!success)
-                        return displayError(`Could not contact the server. Your ${dataName} data could not be imported.`);
-                      Utils.apiPost(`savedata/update?datatype=${dataType}${dataType === GameDataType.SESSION ? `&slot=${slotId}` : ''}&trainerId=${this.trainerId}&secretId=${this.secretId}&clientSessionId=${clientSessionId}`, dataStr, undefined, true)
-                        .then(response => response.text())
-                        .then(error => {
-                          if (error) {
-                            console.error(error);
-                            return displayError(`An error occurred while updating ${dataName} data. Please contact the administrator.`);
-                          }
-                          window.location = window.location;
-                        });
-                    });
-                  } else
-                    window.location = window.location;
-                }, () => {
-                  this.scene.ui.revertMode();
-                  this.scene.ui.showText(null, 0);
-                }, false, -98);
-              });
-            };
-          })((e.target as any).files[0]);
+            if (!valid)
+              return this.scene.ui.showText(`Your ${dataName} data could not be loaded. It may be corrupted.`, null, () => this.scene.ui.showText(null, 0), Utils.fixedInt(1500));
+            this.scene.ui.showText(`Your ${dataName} data will be overridden and the page will reload. Proceed?`, null, () => {
+              this.scene.ui.setOverlayMode(Mode.CONFIRM, () => {
+                localStorage.setItem(dataKey, encrypt(dataStr, bypassLogin));
+
+                if (!bypassLogin && dataType < GameDataType.SETTINGS) {
+                  updateUserInfo().then(success => {
+                    if (!success)
+                      return displayError(`Could not contact the server. Your ${dataName} data could not be imported.`);
+                    Utils.apiPost(`savedata/update?datatype=${dataType}${dataType === GameDataType.SESSION ? `&slot=${slotId}` : ''}&trainerId=${this.trainerId}&secretId=${this.secretId}&clientSessionId=${clientSessionId}`, dataStr, undefined, true)
+                      .then(response => response.text())
+                      .then(error => {
+                        if (error) {
+                          console.error(error);
+                          return displayError(`An error occurred while updating ${dataName} data. Please contact the administrator.`);
+                        }
+                        window.location = window.location;
+                      });
+                  });
+                } else
+                  window.location = window.location;
+              }, () => {
+                this.scene.ui.revertMode();
+                this.scene.ui.showText(null, 0);
+              }, false, -98);
+            });
+          };
+        })((e.target as any).files[0]);
 
         reader.readAsText((e.target as any).files[0]);
       }
@@ -1076,7 +1076,7 @@ export class GameData {
 
     for (let species of allSpecies) {
       data[species.speciesId] = {
-        seenAttr: 0n, caughtAttr: 0n, natureAttr: 0, seenCount: 0, caughtCount: 0, hatchedCount: 0, ivs: [ 0, 0, 0, 0, 0, 0 ]
+        seenAttr: 0n, caughtAttr: 0n, natureAttr: 0, seenCount: 0, caughtCount: 0, hatchedCount: 0, ivs: [0, 0, 0, 0, 0, 0]
       };
     }
 
@@ -1085,7 +1085,7 @@ export class GameData {
     const defaultStarterNatures: Nature[] = [];
 
     this.scene.executeWithSeedOffset(() => {
-      const neutralNatures = [ Nature.HARDY, Nature.DOCILE, Nature.SERIOUS, Nature.BASHFUL, Nature.QUIRKY ];
+      const neutralNatures = [Nature.HARDY, Nature.DOCILE, Nature.SERIOUS, Nature.BASHFUL, Nature.QUIRKY];
       for (let s = 0; s < defaultStarterSpecies.length; s++)
         defaultStarterNatures.push(Utils.randSeedItem(neutralNatures));
     }, 0, 'default');
@@ -1161,7 +1161,7 @@ export class GameData {
           : AbilityAttr.ABILITY_HIDDEN;
       }
       dexEntry.natureAttr |= Math.pow(2, pokemon.nature + 1);
-      
+
       const hasPrevolution = pokemonPrevolutions.hasOwnProperty(species.speciesId);
       const newCatch = !caughtAttr;
       const hasNewAttr = (caughtAttr & dexAttr) !== dexAttr;
@@ -1194,7 +1194,7 @@ export class GameData {
         if (!hasPrevolution && (!pokemon.scene.gameMode.isDaily || hasNewAttr || fromEgg))
           this.addStarterCandy(species, (1 * (pokemon.isShiny() ? 5 * Math.pow(2, pokemon.variant || 0) : 1)) * (fromEgg || pokemon.isBoss() ? 2 : 1));
       }
-    
+
       const checkPrevolution = () => {
         if (hasPrevolution) {
           const prevolutionSpecies = pokemonPrevolutions[species.speciesId];
@@ -1217,7 +1217,7 @@ export class GameData {
     if (!this.starterData[speciesIdToIncrement].classicWinCount) {
       this.starterData[speciesIdToIncrement].classicWinCount = 0;
     }
-    
+
     if (!this.starterData[speciesIdToIncrement].classicWinCount)
       this.scene.gameData.gameStats.ribbonsOwned++;
 
@@ -1392,7 +1392,7 @@ export class GameData {
   getFormAttr(formIndex: integer): bigint {
     return BigInt(Math.pow(2, 7 + formIndex));
   }
-  
+
   consolidateDexData(dexData: DexData): void {
     for (let k of Object.keys(dexData)) {
       const entry = dexData[k] as DexEntry;
@@ -1463,7 +1463,7 @@ export class GameData {
       }
     }
   }
-  
+
   fixStarterData(systemData: SystemSaveData): void {
     for (let starterId of defaultStarterSpecies)
       systemData.starterData[starterId].abilityAttr |= AbilityAttr.ABILITY_1;
