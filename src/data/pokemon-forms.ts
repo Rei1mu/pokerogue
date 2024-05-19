@@ -7,7 +7,7 @@ import { Species } from "./enums/species";
 import { StatusEffect } from "./status-effect";
 import { MoveCategory, allMoves } from "./move";
 import { Abilities } from "./enums/abilities";
-
+import i18next from '../plugins/i18n';
 export enum FormChangeItem {
   NONE,
 
@@ -309,7 +309,7 @@ export function getSpeciesFormChangeMessage(pokemon: Pokemon, formChange: Specie
   const isGmax = formChange.formKey.indexOf(SpeciesFormKey.GIGANTAMAX) > -1;
   const isEmax = formChange.formKey.indexOf('eternamax') > -1;
   const isRevert = !isMega && formChange.formKey === pokemon.species.forms[0].formKey;
-  const prefix = !pokemon.isPlayer() ? pokemon.hasTrainer() ? 'Foe ' : 'Wild ' : 'Your ';
+  const prefix = !pokemon.isPlayer() ? pokemon.hasTrainer() ? i18next.t('battle:Foe')  : i18next.t('battle:Wild')  : i18next.t('battle:Your') ;
   if (isMega)
     return `${prefix}${preName} mega-evolved\ninto ${pokemon.name}!`;
   if (isGmax)

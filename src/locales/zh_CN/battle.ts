@@ -52,5 +52,10 @@ export const battle: SimpleTranslationEntries = {
   "notDisabled": "{{moveName}} 不再被禁用！",
   "skipItemQuestion": "你确定要跳过拾取道具吗？",
   "eggHatching": "咦？",
-  "ivScannerUseQuestion": "对 {{pokemonName}} 使用个体值扫描仪？"
+  "ivScannerUseQuestion": "对 {{pokemonName}} 使用个体值扫描仪？",
+  "Foe": "敌方 ",
+  "Wild": "野生的 ",
+  "Your": "你的 ",
+  "usedMove": " 使用了\n{{moveNameStr}}！",
+  "fainted": "倒下了！"
 } as const;
