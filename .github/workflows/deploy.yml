@@ -39,8 +39,8 @@ jobs:
           cf_auth: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           cf_zone: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           files: |
-            https://pokerogue.net/
-            https://pokerogue.net/index.html
-            https://pokerogue.net/manifest.json
-            https://pokerogue.net/manifest.webmanifest
-            https://pokerogue.net/service-worker.js
+            https://pokerogue.cn/
+            https://pokerogue.cn/index.html
+            https://pokerogue.cn/manifest.json
+            https://pokerogue.cn/manifest.webmanifest
+            https://pokerogue.cn/service-worker.js
