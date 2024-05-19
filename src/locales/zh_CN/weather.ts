@@ -15,7 +15,7 @@ export const weather: SimpleTranslationEntries = {
     "sandstormStartMessage": "开始刮沙暴了！",
     "sandstormLapseMessage": "沙暴肆虐。",
     "sandstormClearMessage": "沙暴停止了！",
-    "sandstormDamageMessage": "沙暴袭击了{{pokemonPrefix}}{{pokemonName}}!",
+    "sandstormDamageMessage": "沙暴袭击了{{pokemonPrefix}}{{pokemonName}}！",
 
     "hailStartMessage": "开始下冰雹了！",
     "hailLapseMessage": "冰雹继续肆虐。",
