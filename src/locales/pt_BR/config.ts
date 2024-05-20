@@ -20,6 +20,7 @@ import { tutorial } from "./tutorial";
 import { weather } from "./weather";
 import { berry } from "./berry";
 import { battleStat } from "./battle-stat";
+import { voucher } from "./voucher";
 
 
 export const ptBrConfig = {    
@@ -47,4 +48,5 @@ export const ptBrConfig = {
     modifierType: modifierType,
     berry: berry,
     battleStat: battleStat,
+    voucher: voucher,
 }

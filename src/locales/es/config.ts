@@ -21,6 +21,7 @@ import { weather } from "./weather";
 import { battleMessageUiHandler } from "./battle-message-ui-handler";
 import { berry } from "./berry";
 import { battleStat } from "./battle-stat";
+import { voucher } from "./voucher";
 
 export const esConfig = {
     ability: ability,
@@ -48,4 +49,5 @@ export const esConfig = {
     battleMessageUiHandler: battleMessageUiHandler,
     berry: berry,
     battleStat: battleStat,
+    voucher: voucher,
 }

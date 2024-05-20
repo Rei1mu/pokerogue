@@ -21,6 +21,7 @@ import { weather } from "./weather";
 import { battleMessageUiHandler } from "./battle-message-ui-handler";
 import { berry } from "./berry";
 import { battleStat } from "./battle-stat";
+import { voucher } from "./voucher";
 
 export const deConfig = {
     ability: ability,
@@ -48,4 +49,5 @@ export const deConfig = {
     battleMessageUiHandler: battleMessageUiHandler,
     berry: berry,
     battleStat: battleStat,
+    voucher: voucher,
 }

@@ -94,7 +94,7 @@ export function initI18n(): void {
   i18next.use(LanguageDetector).init({
     lng: lang,
     fallbackLng: 'en',
-    supportedLngs: ['en', 'es', 'fr', 'it', 'de', 'zh_CN','pt_BR','zh'],
+    supportedLngs: ['en', 'es', 'fr', 'it', 'de', 'zh_CN', 'pt_BR', 'zh'],
     debug: true,
     interpolation: {
       escapeValue: false,
@@ -153,8 +153,9 @@ declare module 'i18next' {
       modifierType: ModifierTypeTranslationEntries;
       battleMessageUiHandler: SimpleTranslationEntries;
       berry: BerryTranslationEntries;
-      battleStat:SimpleTranslationEntries;
-      partyUiHandler:SimpleTranslationEntries;
+      battleStat: SimpleTranslationEntries;
+      partyUiHandler: SimpleTranslationEntries;
+      voucher: SimpleTranslationEntries;
     };
   }
 }
