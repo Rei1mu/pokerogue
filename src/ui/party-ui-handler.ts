@@ -970,13 +970,16 @@ class PartySlot extends Phaser.GameObjects.Container {
       let slotTmText: string;
       switch (true) {
         case (this.pokemon.compatibleTms.indexOf(tmMoveId) === -1):
-          slotTmText = 'Not Able';
+          // zh-cn slotTmText = 'Not Able';
+          slotTmText = '不可用';
           break;
         case (this.pokemon.getMoveset().filter(m => m?.moveId === tmMoveId).length > 0):
-          slotTmText = 'Learned';
+          // zh-cn slotTmText = 'Learned';
+          slotTmText = '已学习';
           break;
         default:
-          slotTmText = 'Able';
+          // zh-cn slotTmText = 'Able';
+          slotTmText = '可用';
           break;
       }
 
@@ -1048,7 +1051,8 @@ class PartyCancelButton extends Phaser.GameObjects.Container {
 
     this.partyCancelPb = partyCancelPb;
 
-    const partyCancelText = addTextObject(this.scene, -7, -6, 'Cancel', TextStyle.PARTY);
+    // zh-cn const partyCancelText = addTextObject(this.scene, -7, -6, 'Cancel', TextStyle.PARTY);
+    const partyCancelText = addTextObject(this.scene, -7, -6, '取消', TextStyle.PARTY);
     this.add(partyCancelText);
   }
 

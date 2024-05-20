@@ -1205,7 +1205,8 @@ export class GameData {
 
       if (newCatch && speciesStarters.hasOwnProperty(species.speciesId)) {
         this.scene.playSound('level_up_fanfare');
-        this.scene.ui.showText(`${species.name} has been\nadded as a starter!`, null, () => checkPrevolution(), null, true);
+        // this.scene.ui.showText(`${species.name} has been\nadded as a starter!`, null, () => checkPrevolution(), null, true);
+        this.scene.ui.showText(`${species.name} 已加入队伍！`, null, () => checkPrevolution(), null, true);
       } else
         checkPrevolution();
     });

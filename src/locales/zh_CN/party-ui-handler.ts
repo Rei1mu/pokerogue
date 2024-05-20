@@ -7,7 +7,7 @@ import { SimpleTranslationEntries } from "#app/plugins/i18n";
  * i18next.t(`partyUiHandler:too_many_item`, { pokemon_name: pokemon.name });
  */
 export const partyUiHandler: SimpleTranslationEntries = {
-    "Do_what_with": "让这个宝可梦做什么？",
+    "Do_what_with": "选择这个宝可梦吗？",
     "Select_a_move": "选择一个招式",
     "Select_a_held_item_to_transfer": "选择将一个持有的道具转移",
     "Select_another_Pokémon_to_splice": "选择别的宝可梦去拼接(splice)",
@@ -35,7 +35,7 @@ export const partyUiHandler: SimpleTranslationEntries = {
     "Send_Out": "上场",
     "Summary": "详细",
     "Release": "放生",
-    "Apply": "支持",
+    "Apply": "应用",
     "Teach": "教",
     "Transfer": "转移",
     "Cancel": "取消",

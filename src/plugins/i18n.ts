@@ -70,8 +70,11 @@ export function initI18n(): void {
   isInitialized = true;
   let lang = '';
 
-  if (localStorage.getItem('prLang'))
+  if (localStorage.getItem('prLang')) {
     lang = localStorage.getItem('prLang');
+  } else {
+    lang = "zh_CN"
+  }
 
 
 
@@ -100,6 +103,9 @@ export function initI18n(): void {
       escapeValue: false,
     },
     resources: {
+      zh_CN: {
+        ...zhCnConfig
+      },
       en: {
         ...enConfig
       },
@@ -117,9 +123,6 @@ export function initI18n(): void {
       },
       pt_BR: {
         ...ptBrConfig
-      },
-      zh_CN: {
-        ...zhCnConfig
       }
     },
   });

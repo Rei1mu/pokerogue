@@ -1251,7 +1251,8 @@ export class SummonPhase extends PartyMemberPokemonPhase {
       this.scene.time.delayedCall(750, () => this.summon());
     } else {
       this.scene.pbTrayEnemy.hide();
-      this.scene.ui.showText(`${this.scene.currentBattle.trainer.getName(!(this.fieldIndex % 2) ? TrainerSlot.TRAINER : TrainerSlot.TRAINER_PARTNER)} sent out\n${this.getPokemon().name}!`, null, () => this.summon());
+      // zh-cn this.scene.ui.showText(`${this.scene.currentBattle.trainer.getName(!(this.fieldIndex % 2) ? TrainerSlot.TRAINER : TrainerSlot.TRAINER_PARTNER)} sent out\n${this.getPokemon().name}!`, null, () => this.summon());
+      this.scene.ui.showText(`${this.scene.currentBattle.trainer.getName(!(this.fieldIndex % 2) ? TrainerSlot.TRAINER : TrainerSlot.TRAINER_PARTNER)} 丢出了\n${this.getPokemon().name}！`, null, () => this.summon());
     }
   }
 
@@ -3512,7 +3513,8 @@ export class MoneyRewardPhase extends BattlePhase {
 
     this.scene.addMoney(moneyAmount.value);
 
-    this.scene.ui.showText(`You got ₽${moneyAmount.value.toLocaleString('en-US')}\nfor winning!`, null, () => this.end(), null, true);
+    // this.scene.ui.showText(`You got ₽${moneyAmount.value.toLocaleString('en-US')}\nfor winning!`, null, () => this.end(), null, true);
+    this.scene.ui.showText(`你获得了 ₽${moneyAmount.value.toLocaleString('en-US')}！`, null, () => this.end(), null, true);
   }
 }
 
@@ -3603,7 +3605,8 @@ export class GameOverPhase extends BattlePhase {
     if (this.victory || !this.scene.enableRetries)
       this.handleGameOver();
     else {
-      this.scene.ui.showText(`Would you like to retry from the start of the battle?`, null, () => {
+      this.scene.ui.showText(`是否要重新战斗，再试一次？`, null, () => {
+      // this.scene.ui.showText(`Would you like to retry from the start of the battle?`, null, () => {
         this.scene.ui.setMode(Mode.CONFIRM, () => {
           this.scene.ui.fadeOut(1250).then(() => {
           this.scene.reset();
@@ -4191,7 +4194,8 @@ export class PokemonHealPhase extends CommonAnimPhase {
         pokemon.resetStatus();
         pokemon.updateInfo().then(() => super.end());
     } else if (this.showFullHpMessage)
-      this.message = getPokemonMessage(pokemon, `'s\nHP is full!`);
+      // this.message = getPokemonMessage(pokemon, `'s\nHP is full!`);
+      this.message = getPokemonMessage(pokemon, `的\nHP 满了!`);
 
     if (this.message)
       this.scene.queueMessage(this.message);
@@ -4418,7 +4422,9 @@ export class AttemptCapturePhase extends PokemonPhase {
       Promise.all([ pokemon.hideInfo(), this.scene.gameData.setPokemonCaught(pokemon) ]).then(() => {
         if (this.scene.getParty().length === 6) {
           const promptRelease = () => {
-            this.scene.ui.showText(`Your party is full.\nRelease a Pokémon to make room for ${pokemon.name}?`, null, () => {
+            //zh-cn this.scene.ui.showText(`Your party is full.\nRelease a Pokémon to make room for ${pokemon.name}?`, null, () => {
+              
+            this.scene.ui.showText(`你的队伍满了\n是否放生一只为了 ${pokemon.name}？`, null, () => {
               this.scene.ui.setMode(Mode.CONFIRM, () => {
                 this.scene.ui.setMode(Mode.PARTY, PartyUiMode.RELEASE, this.fieldIndex, (slotIndex: integer, _option: PartyOption) => {
                   this.scene.ui.setMode(Mode.MESSAGE).then(() => {

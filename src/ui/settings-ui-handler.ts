@@ -5,7 +5,8 @@ import { TextStyle, addTextObject } from "./text";
 import { Mode } from "./ui";
 import UiHandler from "./ui-handler";
 import { addWindow } from "./ui-theme";
-import {Button} from "../enums/buttons";
+import { Button } from "../enums/buttons";
+import i18next from "i18next";
 
 export default class SettingsUiHandler extends UiHandler {
   private settingsContainer: Phaser.GameObjects.Container;
@@ -34,7 +35,7 @@ export default class SettingsUiHandler extends UiHandler {
 
   setup() {
     const ui = this.getUi();
-    
+
     this.settingsContainer = this.scene.add.container(1, -(this.scene.game.canvas.height / 6) + 1);
 
     this.settingsContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.scene.game.canvas.width / 6, this.scene.game.canvas.height / 6), Phaser.Geom.Rectangle.Contains);
@@ -56,8 +57,10 @@ export default class SettingsUiHandler extends UiHandler {
 
     Object.keys(Setting).forEach((setting, s) => {
       let settingName = setting.replace(/\_/g, ' ');
+      settingName = i18next.t(`menu:${settingName.replace(/\ /g, '_')}`)
       if (reloadSettings.includes(Setting[setting]))
-        settingName += ' (Requires Reload)';
+        // settingName += ' (Requires Reload)';
+        settingName += i18next.t('menu:Requires_Reload');
 
       this.settingLabels[s] = addTextObject(this.scene, 8, 28 + s * 16, settingName, TextStyle.SETTINGS_LABEL);
       this.settingLabels[s].setOrigin(0, 0);
@@ -75,7 +78,7 @@ export default class SettingsUiHandler extends UiHandler {
 
       const totalWidth = this.optionValueLabels[s].map(o => o.width).reduce((total, width) => total += width, 0);
 
-      const labelWidth =  Math.max(78, this.settingLabels[s].displayWidth + 8);
+      const labelWidth = Math.max(78, this.settingLabels[s].displayWidth + 8);
 
       const totalSpace = (300 - labelWidth) - totalWidth / 6;
       const optionSpacing = Math.floor(totalSpace / (this.optionValueLabels[s].length - 1));
@@ -105,7 +108,7 @@ export default class SettingsUiHandler extends UiHandler {
 
   show(args: any[]): boolean {
     super.show(args);
-    
+
     const settings: object = localStorage.hasOwnProperty('settings') ? JSON.parse(localStorage.getItem('settings')) : {};
 
     Object.keys(settingDefaults).forEach((setting, s) => this.setOptionCursor(s, settings.hasOwnProperty(setting) ? settings[setting] : settingDefaults[setting]));
@@ -150,12 +153,12 @@ export default class SettingsUiHandler extends UiHandler {
             else
               success = this.setScrollCursor(this.scrollCursor - 1);
           } else {
-              // When at the top of the menu and pressing UP, move to the bottommost item.
-              // First, set the cursor to the last visible element, preparing for the scroll to the end.
-              const successA = this.setCursor(rowsToDisplay - 1);
-              // Then, adjust the scroll to display the bottommost elements of the menu.
-              const successB = this.setScrollCursor(this.optionValueLabels.length - rowsToDisplay);
-              success = successA && successB; // success is just there to play the little validation sound effect
+            // When at the top of the menu and pressing UP, move to the bottommost item.
+            // First, set the cursor to the last visible element, preparing for the scroll to the end.
+            const successA = this.setCursor(rowsToDisplay - 1);
+            // Then, adjust the scroll to display the bottommost elements of the menu.
+            const successB = this.setScrollCursor(this.optionValueLabels.length - rowsToDisplay);
+            success = successA && successB; // success is just there to play the little validation sound effect
           }
           break;
         case Button.DOWN:
@@ -165,12 +168,12 @@ export default class SettingsUiHandler extends UiHandler {
             else if (this.scrollCursor < this.optionValueLabels.length - rowsToDisplay)
               success = this.setScrollCursor(this.scrollCursor + 1);
           } else {
-              // When at the bottom of the menu and pressing DOWN, move to the topmost item.
-              // First, set the cursor to the first visible element, resetting the scroll to the top.
-              const successA = this.setCursor(0);
-              // Then, reset the scroll to start from the first element of the menu.
-              const successB = this.setScrollCursor(0);
-              success = successA && successB; // Indicates a successful cursor and scroll adjustment.
+            // When at the bottom of the menu and pressing DOWN, move to the topmost item.
+            // First, set the cursor to the first visible element, resetting the scroll to the top.
+            const successA = this.setCursor(0);
+            // Then, reset the scroll to start from the first element of the menu.
+            const successB = this.setScrollCursor(0);
+            success = successA && successB; // Indicates a successful cursor and scroll adjustment.
           }
           break;
         case Button.LEFT:
@@ -269,7 +272,7 @@ export default class SettingsUiHandler extends UiHandler {
     if (this.reloadRequired) {
       this.reloadRequired = false;
       this.scene.reset(true, false, true);
-    } 
+    }
   }
 
   eraseCursor() {
