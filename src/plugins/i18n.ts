@@ -159,6 +159,7 @@ declare module 'i18next' {
       battleStat: SimpleTranslationEntries;
       partyUiHandler: SimpleTranslationEntries;
       voucher: SimpleTranslationEntries;
+      statusEffect: SimpleTranslationEntries;
     };
   }
 }

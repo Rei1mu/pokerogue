@@ -21,9 +21,9 @@ import { weather } from "./weather";
 import { battleMessageUiHandler } from "./battle-message-ui-handler";
 import { berry } from "./berry";
 import { battleStat } from "./battle-stat";
-import {partyUiHandler}from "./party-ui-handler"
+import { partyUiHandler } from "./party-ui-handler"
 import { voucher } from "./voucher";
-
+import { statusEffect } from "./status-effect";
 
 export const zhCnConfig = {
     ability: ability,
@@ -51,6 +51,7 @@ export const zhCnConfig = {
     battleMessageUiHandler: battleMessageUiHandler,
     berry: berry,
     battleStat: battleStat,
-    partyUiHandler:partyUiHandler,
+    partyUiHandler: partyUiHandler,
     voucher: voucher,
+    statusEffect: statusEffect,
 }

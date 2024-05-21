@@ -21,10 +21,10 @@ import { weather } from "./weather";
 import { battleMessageUiHandler } from "./battle-message-ui-handler";
 import { berry } from "./berry";
 import { battleStat } from "./battle-stat";
-import{partyUiHandler} from "./party-ui-handler"
+import { partyUiHandler } from "./party-ui-handler"
 import { voucher } from "./voucher";
-
-export const enConfig = {    
+import { statusEffect } from "./status-effect"
+export const enConfig = {
     ability: ability,
     abilityTriggers: abilityTriggers,
     battle: battle,
@@ -50,6 +50,7 @@ export const enConfig = {
     battleMessageUiHandler: battleMessageUiHandler,
     berry: berry,
     battleStat: battleStat,
-    partyUiHandler:partyUiHandler,
+    partyUiHandler: partyUiHandler,
     voucher: voucher,
+    statusEffect: statusEffect,
 }

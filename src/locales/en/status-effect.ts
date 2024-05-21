@@ -1,0 +1,30 @@
+import { SimpleTranslationEntries } from "#app/plugins/i18n";
+
+export const statusEffect: SimpleTranslationEntries = {
+    "is_hurt_by_poison": " is hurt\nby poison!",
+    "is_paralyzed_It_cant_move": " is paralyzed!\nIt can\'t move!",
+    "is_fast_asleep": " is fast asleep.",
+    "is_frozen_solid": " is\nfrozen solid!",
+    "is_hurt_by_its_burn": " is hurt\nby its burn!",
+    "is_already_poisoned": " is\nalready poisoned!",
+    "is_already_paralyzed": " is\nalready paralyzed!",
+    "is_already_asleep": " is\nalready asleep!",
+    "is_already_frozen": " is\nalready frozen!",
+    "is_already_burned": " is\nalready burned!",
+    "was_cured_of_its_poison": " was\ncured of its poison!",
+    "was_healed_of_paralysis": " was\nhealed of paralysis!",
+    "woke_up": " woke up!",
+    "was_defrosted": " was\ndefrosted!",
+    "was_healed_of_its_burn": " was\nhealed of its burn!",
+    "poisoning": "poisoning",
+    "paralysis": "paralysis",
+    "sleep": "sleep",
+    "freezing": "freezing",
+    "burn": "burn",
+    "was_poisoned": "\nwas poisoned{{sourceClause}}!",
+    "was_badly_poisoned": "\nwas badly poisoned{{sourceClause}}!",
+    "was_paralyzed": " was paralyzed{{sourceClause}}!\nIt may be unable to move!",
+    "fell_asleep": "\nfell asleep{{sourceClause}}!",
+    "was_frozen_solid": "\nwas frozen solid{{sourceClause}}!",
+    "was_burned": "\nwas burned{{sourceClause}}!"
+} as const;
