@@ -39,6 +39,7 @@ export function getStatusEffectObtainText(statusEffect: StatusEffect, sourceText
     case StatusEffect.TOXIC:
       return `\nwas badly poisoned${sourceClause}!`;
     case StatusEffect.PARALYSIS:
+      // zh-cn paralyzed
       return ` was paralyzed${sourceClause}!\nIt may be unable to move!`;
     case StatusEffect.SLEEP:
       return `\nfell asleep${sourceClause}!`;
