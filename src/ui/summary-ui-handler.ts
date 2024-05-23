@@ -680,10 +680,11 @@ export default class SummaryUiHandler extends UiHandler {
             ? this.scene.add.sprite(xCoord, 42, 'types', Type[type].toLowerCase())
             : this.scene.add.sprite(xCoord, 42, 'type_tera');
           if (tera) {
-            typeIcon.setScale(0.5);
+            typeIcon.setScale(0.2);
             const typeRgb = getTypeRgb(type);
             typeIcon.setTint(Phaser.Display.Color.GetColor(typeRgb[0], typeRgb[1], typeRgb[2]));
           }
+          typeIcon.setScale(0.25);
           typeIcon.setOrigin(0, 1);
           return typeIcon;
         };
@@ -879,6 +880,7 @@ export default class SummaryUiHandler extends UiHandler {
         if (this.summaryUiMode === SummaryUiMode.LEARN_MOVE) {
           this.extraMoveRowContainer.setVisible(true);
           const newMoveTypeIcon = this.scene.add.sprite(0, 0, 'types', Type[this.newMove.type].toLowerCase());
+          newMoveTypeIcon.setScale(0.25);
           newMoveTypeIcon.setOrigin(0, 1);
           this.extraMoveRowContainer.add(newMoveTypeIcon);
 
@@ -902,6 +904,7 @@ export default class SummaryUiHandler extends UiHandler {
 
           if (move) {
             const typeIcon = this.scene.add.sprite(0, 0, 'types', Type[move.getMove().type].toLowerCase());
+            typeIcon.setScale(0.25);
             typeIcon.setOrigin(0, 1);
             moveRowContainer.add(typeIcon);
           }

@@ -15,6 +15,7 @@ import { TerrainType } from "./terrain";
 import { WeatherType } from "./weather";
 import { BattleStat } from "./battle-stat";
 import { allAbilities } from "./ability";
+import i18next, { Localizable } from '../plugins/i18n';
 
 export enum BattlerTagLapseType {
   FAINT,

@@ -161,7 +161,7 @@ export default class FightUiHandler extends UiHandler {
 
     if (hasMove) {
       const pokemonMove = moveset[cursor];
-      this.typeIcon.setTexture('types', Type[pokemonMove.getMove().type].toLowerCase()).setScale(0.8);
+      this.typeIcon.setTexture('types', Type[pokemonMove.getMove().type].toLowerCase()).setScale(0.2);
       this.moveCategoryIcon.setTexture('categories', MoveCategory[pokemonMove.getMove().category].toLowerCase()).setScale(1.0);
 
       const power = pokemonMove.getMove().power;
