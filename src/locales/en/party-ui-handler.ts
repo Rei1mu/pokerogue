@@ -35,7 +35,7 @@ export const partyUiHandler: SimpleTranslationEntries = {
     "Send_Out": "Send_Out",
     "Summary": "Summary",
     "Release": "Release",
-    "Apply": "Apply：",
+    "Apply": "Apply",
     "Teach": "Teach",
     "Transfer": "Transfer",
     "Cancel": "Cancel",

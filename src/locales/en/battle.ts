@@ -56,6 +56,6 @@ export const battle: SimpleTranslationEntries = {
   "Foe": "Foe ",
   "Wild": "Wild ",
   "Your": "Your ",
-  "usedMove": " used\n{{moveName}}!",
+  "usedMove": " used\n{{moveNameStr}}!",
   "fainted": "fainted!"
 } as const;

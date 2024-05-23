@@ -24,6 +24,8 @@ import { battleStat } from "./battle-stat";
 import { partyUiHandler } from "./party-ui-handler"
 import { voucher } from "./voucher";
 import { statusEffect } from "./status-effect"
+import { modifierSelectUiHandler } from "./modifier-select-ui-handler"
+
 export const enConfig = {
     ability: ability,
     abilityTriggers: abilityTriggers,
@@ -53,4 +55,5 @@ export const enConfig = {
     partyUiHandler: partyUiHandler,
     voucher: voucher,
     statusEffect: statusEffect,
+    modifierSelectUiHandler: modifierSelectUiHandler,
 }

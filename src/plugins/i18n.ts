@@ -160,6 +160,7 @@ declare module 'i18next' {
       partyUiHandler: SimpleTranslationEntries;
       voucher: SimpleTranslationEntries;
       statusEffect: SimpleTranslationEntries;
+      modifierSelectUiHandler: SimpleTranslationEntries;
     };
   }
 }

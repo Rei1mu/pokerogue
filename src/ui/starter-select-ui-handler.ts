@@ -464,12 +464,12 @@ export default class StarterSelectUiHandler extends MessageUiHandler {
     this.pokemonSprite.setPipeline(this.scene.spritePipeline, { tone: [ 0.0, 0.0, 0.0, 0.0 ], ignoreTimeTint: true });
     this.starterSelectContainer.add(this.pokemonSprite);
 
-    this.type1Icon = this.scene.add.sprite(8, 98, 'types').setScale(0.1);
+    this.type1Icon = this.scene.add.sprite(8, 98, 'types').setScale(0.13);
     // this.type1Icon.setScale(0.2);
     this.type1Icon.setOrigin(0, 0);
     this.starterSelectContainer.add(this.type1Icon);
 
-    this.type2Icon = this.scene.add.sprite(26, 98, 'types').setScale(0.1);
+    this.type2Icon = this.scene.add.sprite(26, 98, 'types').setScale(0.13);
     // this.type2Icon.setScale(0.2);
     this.type2Icon.setOrigin(0, 0);
     this.starterSelectContainer.add(this.type2Icon);

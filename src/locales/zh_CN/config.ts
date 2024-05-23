@@ -24,6 +24,7 @@ import { battleStat } from "./battle-stat";
 import { partyUiHandler } from "./party-ui-handler"
 import { voucher } from "./voucher";
 import { statusEffect } from "./status-effect";
+import { modifierSelectUiHandler } from "./modifier-select-ui-handler";
 
 export const zhCnConfig = {
     ability: ability,
@@ -54,4 +55,5 @@ export const zhCnConfig = {
     partyUiHandler: partyUiHandler,
     voucher: voucher,
     statusEffect: statusEffect,
+    modifierSelectUiHandler: modifierSelectUiHandler,
 }
