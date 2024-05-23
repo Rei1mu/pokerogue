@@ -51,9 +51,9 @@ export const enConfig = {
     weather: weather,
     battleMessageUiHandler: battleMessageUiHandler,
     berry: berry,
+    voucher: voucher,
     battleStat: battleStat,
     partyUiHandler: partyUiHandler,
-    voucher: voucher,
     statusEffect: statusEffect,
     modifierSelectUiHandler: modifierSelectUiHandler,
 }

@@ -48,6 +48,6 @@ export const esConfig = {
     weather: weather,
     battleMessageUiHandler: battleMessageUiHandler,
     berry: berry,
-    battleStat: battleStat,
     voucher: voucher,
+    battleStat: battleStat,
 }

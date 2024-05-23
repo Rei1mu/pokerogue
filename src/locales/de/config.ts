@@ -48,6 +48,6 @@ export const deConfig = {
     weather: weather,
     battleMessageUiHandler: battleMessageUiHandler,
     berry: berry,
-    battleStat: battleStat,
     voucher: voucher,
+    battleStat: battleStat,
 }
