@@ -255,13 +255,6 @@ export class TitlePhase extends Phase {
         }
       },
       {
-        label: i18next.t("menu:dailyRun"),
-        handler: () => {
-          this.initDailyRun();
-          return true;
-        }
-      },
-      {
         label: i18next.t('menu:dailyRun'),
         handler: () => {
           this.initDailyRun();
