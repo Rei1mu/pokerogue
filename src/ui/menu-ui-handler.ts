@@ -122,7 +122,7 @@ export default class MenuUiHandler extends MessageUiHandler {
     };
 
     // if (Utils.isLocal) {
-    if (true) {
+    if (Utils.isLocal) {
       manageDataOptions.push({
         label: i18next.t("menuUiHandler:importSession"),
         handler: () => {
