@@ -1795,33 +1795,33 @@ export class CommandPhase extends FieldPhase {
     let success: boolean;
 
     switch (command) {
-      case Command.FIGHT:
-        let useStruggle = false;
-        if (cursor === -1 ||
-          playerPokemon.trySelectMove(cursor, args[0] as boolean) ||
-          (useStruggle = cursor > -1 && !playerPokemon.getMoveset().filter(m => m.isUsable(playerPokemon)).length)) {
-          const moveId = !useStruggle ? cursor > -1 ? playerPokemon.getMoveset()[cursor].moveId : Moves.NONE : Moves.STRUGGLE;
-          const turnCommand: TurnCommand = { command: Command.FIGHT, cursor: cursor, move: { move: moveId, targets: [], ignorePP: args[0] }, args: args };
-          const moveTargets: MoveTargetSet = args.length < 3 ? getMoveTargets(playerPokemon, moveId) : args[2];
-          if (!moveId) {
-            turnCommand.targets = [this.fieldIndex];
-          }
-          console.log(moveTargets, playerPokemon.name);
-          if (moveTargets.targets.length <= 1 || moveTargets.multiple) {
-            turnCommand.move.targets = moveTargets.targets;
-          } else if (playerPokemon.getTag(BattlerTagType.CHARGING) && playerPokemon.getMoveQueue().length >= 1) {
-            turnCommand.move.targets = playerPokemon.getMoveQueue()[0].targets;
-          } else {
-            this.scene.unshiftPhase(new SelectTargetPhase(this.scene, this.fieldIndex));
-          }
-          this.scene.currentBattle.turnCommands[this.fieldIndex] = turnCommand;
-          success = true;
-        } else if (cursor < playerPokemon.getMoveset().length) {
-          const move = playerPokemon.getMoveset()[cursor];
-          this.scene.ui.setMode(Mode.MESSAGE);
+    case Command.FIGHT:
+      let useStruggle = false;
+      if (cursor === -1 ||
+            playerPokemon.trySelectMove(cursor, args[0] as boolean) ||
+           (useStruggle = cursor > -1 && !playerPokemon.getMoveset().filter(m => m.isUsable(playerPokemon)).length)) {
+        const moveId = !useStruggle ? cursor > -1 ? playerPokemon.getMoveset()[cursor].moveId : Moves.NONE : Moves.STRUGGLE;
+        const turnCommand: TurnCommand = { command: Command.FIGHT, cursor: cursor, move: { move: moveId, targets: [], ignorePP: args[0] }, args: args };
+        const moveTargets: MoveTargetSet = args.length < 3 ? getMoveTargets(playerPokemon, moveId) : args[2];
+        if (!moveId) {
+          turnCommand.targets = [ this.fieldIndex ];
+        }
+        console.log(moveTargets, playerPokemon.name);
+        if (moveTargets.targets.length <= 1 || moveTargets.multiple) {
+          turnCommand.move.targets = moveTargets.targets;
+        } else if (playerPokemon.getTag(BattlerTagType.CHARGING) && playerPokemon.getMoveQueue().length >= 1) {
+          turnCommand.move.targets = playerPokemon.getMoveQueue()[0].targets;
+        } else {
+          this.scene.unshiftPhase(new SelectTargetPhase(this.scene, this.fieldIndex));
+        }
+        this.scene.currentBattle.turnCommands[this.fieldIndex] = turnCommand;
+        success = true;
+      } else if (cursor < playerPokemon.getMoveset().length) {
+        const move = playerPokemon.getMoveset()[cursor];
+        this.scene.ui.setMode(Mode.MESSAGE);
 
-          // Decides between a Disabled, Not Implemented, or No PP translation message
-          const errorMessage =
+        // Decides between a Disabled, Not Implemented, or No PP translation message
+        const errorMessage =
             playerPokemon.summonData.disabledMove === move.moveId ? "battle:moveDisabled" :
               move.getName().endsWith(" (N)") ? "battle:moveNotImplemented" : "battle:moveNoPP";
           const moveName = move.getName().replace(" (N)", ""); // Trims off the indicator
@@ -1934,6 +1934,23 @@ export class CommandPhase extends FieldPhase {
                 }
               }, null, true);
           }
+          if (!isSwitch) {
+            this.scene.ui.setMode(Mode.COMMAND, this.fieldIndex);
+            this.scene.ui.setMode(Mode.MESSAGE);
+          }
+          this.scene.ui.showText(
+            i18next.t("battle:noEscapePokemon", {
+              pokemonName: this.scene.getPokemonById(trapTag.sourceId).name,
+              moveName: trapTag.getMoveName(),
+              escapeVerb: isSwitch ? i18next.t("battle:escapeVerbSwitch") : i18next.t("battle:escapeVerbFlee")
+            }),
+            null,
+            () => {
+              this.scene.ui.showText(null, 0);
+              if (!isSwitch) {
+                this.scene.ui.setMode(Mode.COMMAND, this.fieldIndex);
+              }
+            }, null, true);
         }
         break;
     }
@@ -2025,7 +2042,7 @@ export class EnemyCommandPhase extends FieldPhase {
             const index = trainer.getNextSummonIndex(enemyPokemon.trainerSlot, partyMemberScores);
 
             battle.turnCommands[this.fieldIndex + BattlerIndex.ENEMY] =
-              { command: Command.POKEMON, cursor: index, args: [false] };
+              { command: Command.POKEMON, cursor: index, args: [ false ] };
 
             battle.enemySwitchCounter++;
 

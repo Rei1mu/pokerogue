@@ -707,27 +707,27 @@ export default class PartyUiHandler extends MessageUiHandler {
         optionName = "↓";
       } else if ((this.partyUiMode !== PartyUiMode.REMEMBER_MOVE_MODIFIER && (this.partyUiMode !== PartyUiMode.MODIFIER_TRANSFER || this.transferMode)) || option === PartyOption.CANCEL) {
         switch (option) {
-          case PartyOption.MOVE_1:
-          case PartyOption.MOVE_2:
-          case PartyOption.MOVE_3:
-          case PartyOption.MOVE_4:
-            const move = pokemon.moveset[option - PartyOption.MOVE_1];
-            if (this.showMovePp) {
-              const maxPP = move.getMovePp();
-              const currPP = maxPP - move.ppUsed;
-              optionName = `${move.getName()} ${currPP}/${maxPP}`;
-            } else {
-              optionName = move.getName();
-            }
-            break;
-          default:
-            if (formChangeItemModifiers && option >= PartyOption.FORM_CHANGE_ITEM) {
-              const modifier = formChangeItemModifiers[option - PartyOption.FORM_CHANGE_ITEM];
-              optionName = `${modifier.active ? "Deactivate" : "Activate"} ${modifier.type.name}`;
-            } else {
-              optionName = Utils.toReadableString(PartyOption[option]);
-            }
-            break;
+        case PartyOption.MOVE_1:
+        case PartyOption.MOVE_2:
+        case PartyOption.MOVE_3:
+        case PartyOption.MOVE_4:
+          const move = pokemon.moveset[option - PartyOption.MOVE_1];
+          if (this.showMovePp) {
+            const maxPP = move.getMovePp();
+            const currPP = maxPP - move.ppUsed;
+            optionName = `${move.getName()} ${currPP}/${maxPP}`;
+          } else {
+            optionName = move.getName();
+          }
+          break;
+        default:
+          if (formChangeItemModifiers && option >= PartyOption.FORM_CHANGE_ITEM) {
+            const modifier = formChangeItemModifiers[option - PartyOption.FORM_CHANGE_ITEM];
+            optionName = `${modifier.active ? "Deactivate" : "Activate"} ${modifier.type.name}`;
+          } else {
+            optionName = Utils.toReadableString(PartyOption[option]);
+          }
+          break;
         }
       } else if (this.partyUiMode === PartyUiMode.REMEMBER_MOVE_MODIFIER) {
         const move = learnableLevelMoves[option];

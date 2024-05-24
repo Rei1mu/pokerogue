@@ -107,7 +107,7 @@ export class RechargingTag extends BattlerTag {
     pokemon.scene.queueMessage(getPokemonMessage(pokemon, " must\nrecharge!"));
     (pokemon.scene.getCurrentPhase() as MovePhase).cancel();
     pokemon.getMoveQueue().shift();
-    
+
     return true;
   }
 }
@@ -116,7 +116,7 @@ export class TrappedTag extends BattlerTag {
   constructor(tagType: BattlerTagType, lapseType: BattlerTagLapseType, turnCount: integer, sourceMove: Moves, sourceId: integer) {
     super(tagType, lapseType, turnCount, sourceMove, sourceId);
   }
-  
+
   canAdd(pokemon: Pokemon): boolean {
     const isGhost = pokemon.isOfType(Type.GHOST);
     const isTrapped = pokemon.getTag(BattlerTagType.TRAPPED);
@@ -179,7 +179,7 @@ export class FlinchedTag extends BattlerTag {
 }
 
 export class InterruptedTag extends BattlerTag {
-  constructor(sourceMove: Moves){
+  constructor(sourceMove: Moves) {
     super(BattlerTagType.INTERRUPTED, BattlerTagLapseType.PRE_MOVE, 0, sourceMove);
   }
 
@@ -197,7 +197,7 @@ export class InterruptedTag extends BattlerTag {
   lapse(pokemon: Pokemon, lapseType: BattlerTagLapseType): boolean {
     super.lapse(pokemon, lapseType);
     (pokemon.scene.getCurrentPhase() as MovePhase).cancel();
-    return true; 
+    return true;
   }
 }
 
@@ -212,14 +212,14 @@ export class ConfusedTag extends BattlerTag {
 
   onAdd(pokemon: Pokemon): void {
     super.onAdd(pokemon);
-    
+
     pokemon.scene.unshiftPhase(new CommonAnimPhase(pokemon.scene, pokemon.getBattlerIndex(), undefined, CommonAnim.CONFUSION));
     pokemon.scene.queueMessage(getPokemonMessage(pokemon, " became\nconfused!"));
   }
 
   onRemove(pokemon: Pokemon): void {
     super.onRemove(pokemon);
-    
+
     pokemon.scene.queueMessage(getPokemonMessage(pokemon, " snapped\nout of confusion!"));
   }
 
@@ -246,7 +246,7 @@ export class ConfusedTag extends BattlerTag {
         (pokemon.scene.getCurrentPhase() as MovePhase).cancel();
       }
     }
-    
+
     return ret;
   }
 
@@ -266,7 +266,7 @@ export class InfatuatedTag extends BattlerTag {
 
   onAdd(pokemon: Pokemon): void {
     super.onAdd(pokemon);
-    
+
     pokemon.scene.queueMessage(getPokemonMessage(pokemon, ` fell in love\nwith ${pokemon.scene.getPokemonById(this.sourceId).name}!`));
   }
 
@@ -288,7 +288,7 @@ export class InfatuatedTag extends BattlerTag {
         (pokemon.scene.getCurrentPhase() as MovePhase).cancel();
       }
     }
-    
+
     return ret;
   }
 
@@ -329,7 +329,7 @@ export class SeedTag extends BattlerTag {
 
   onAdd(pokemon: Pokemon): void {
     super.onAdd(pokemon);
-    
+
     pokemon.scene.queueMessage(getPokemonMessage(pokemon, " was seeded!"));
     this.sourceIndex = pokemon.scene.getPokemonById(this.sourceId).getBattlerIndex();
   }
@@ -355,7 +355,7 @@ export class SeedTag extends BattlerTag {
         }
       }
     }
-    
+
     return ret;
   }
 
@@ -371,7 +371,7 @@ export class NightmareTag extends BattlerTag {
 
   onAdd(pokemon: Pokemon): void {
     super.onAdd(pokemon);
-    
+
     pokemon.scene.queueMessage(getPokemonMessage(pokemon, " began\nhaving a Nightmare!"));
   }
 
@@ -395,7 +395,7 @@ export class NightmareTag extends BattlerTag {
         pokemon.damageAndUpdate(Math.ceil(pokemon.getMaxHp() / 4));
       }
     }
-    
+
     return ret;
   }
 
@@ -442,12 +442,12 @@ export class EncoreTag extends BattlerTag {
     if (pokemon.isMax()) {
       return false;
     }
-    
+
     const lastMoves = pokemon.getLastXMoves(1);
     if (!lastMoves.length) {
       return false;
     }
-  
+
     const repeatableMove = lastMoves[0];
 
     if (!repeatableMove.move || repeatableMove.virtual) {
@@ -464,7 +464,7 @@ export class EncoreTag extends BattlerTag {
     case Moves.ENCORE:
       return false;
     }
-  
+
     if (allMoves[repeatableMove.move].getAttrs(ChargeAttr).length && repeatableMove.result === MoveResult.OTHER) {
       return false;
     }
@@ -534,7 +534,7 @@ export class IngrainTag extends TrappedTag {
       pokemon.scene.unshiftPhase(new PokemonHealPhase(pokemon.scene, pokemon.getBattlerIndex(), Math.floor(pokemon.getMaxHp() / 16),
         getPokemonMessage(pokemon, " absorbed\nnutrients with its roots!"), true));
     }
-    
+
     return ret;
   }
 
@@ -554,7 +554,7 @@ export class AquaRingTag extends BattlerTag {
 
   onAdd(pokemon: Pokemon): void {
     super.onAdd(pokemon);
-    
+
     pokemon.scene.queueMessage(getPokemonMessage(pokemon, " surrounded\nitself with a veil of water!"));
   }
 
@@ -565,7 +565,7 @@ export class AquaRingTag extends BattlerTag {
       pokemon.scene.unshiftPhase(new PokemonHealPhase(pokemon.scene, pokemon.getBattlerIndex(),
         Math.floor(pokemon.getMaxHp() / 16), `${this.getMoveName()} restored\n${pokemon.name}\'s HP!`, true));
     }
-    
+
     return ret;
   }
 }
@@ -586,7 +586,7 @@ export class MinimizeTag extends BattlerTag {
 
   lapse(pokemon: Pokemon, lapseType: BattlerTagLapseType): boolean {
     //If a pokemon dynamaxes they lose minimized status
-    if(pokemon.isMax()){
+    if (pokemon.isMax()) {
       return false;
     }
     return lapseType !== BattlerTagLapseType.CUSTOM || super.lapse(pokemon, lapseType);
@@ -1008,7 +1008,7 @@ export class SlowStartTag extends AbilityBattlerTag {
 
   onAdd(pokemon: Pokemon): void {
     super.onAdd(pokemon);
-    
+
     pokemon.scene.queueMessage(getPokemonMessage(pokemon, " can't\nget it going!"), null, false, null, true);
   }
 
@@ -1068,7 +1068,7 @@ export class HighestStatBoostTag extends AbilityBattlerTag {
       this.multiplier = 1.3;
       break;
     }
-    
+
     pokemon.scene.queueMessage(getPokemonMessage(pokemon, `'s ${getStatName(highestStat)}\nwas heightened!`), null, false, null, true);
   }
 
@@ -1122,7 +1122,7 @@ export class HideSpriteTag extends BattlerTag {
 
   onAdd(pokemon: Pokemon): void {
     super.onAdd(pokemon);
-    
+
     pokemon.setVisible(false);
   }
 
@@ -1238,7 +1238,7 @@ export class SaltCuredTag extends BattlerTag {
 
   onAdd(pokemon: Pokemon): void {
     super.onAdd(pokemon);
-    
+
     pokemon.scene.queueMessage(getPokemonMessage(pokemon, " is being salt cured!"));
     this.sourceIndex = pokemon.scene.getPokemonById(this.sourceId).getBattlerIndex();
   }
@@ -1259,7 +1259,7 @@ export class SaltCuredTag extends BattlerTag {
         pokemon.scene.queueMessage(getPokemonMessage(pokemon, ` is hurt by ${this.getMoveName()}!`));
       }
     }
-    
+
     return ret;
   }
 }
@@ -1282,7 +1282,7 @@ export class CursedTag extends BattlerTag {
 
   onAdd(pokemon: Pokemon): void {
     super.onAdd(pokemon);
-    
+
     pokemon.scene.queueMessage(getPokemonMessage(pokemon, " has been cursed!"));
     this.sourceIndex = pokemon.scene.getPokemonById(this.sourceId).getBattlerIndex();
   }
@@ -1301,7 +1301,7 @@ export class CursedTag extends BattlerTag {
         pokemon.scene.queueMessage(getPokemonMessage(pokemon, ` is hurt by the ${this.getMoveName()}!`));
       }
     }
-    
+
     return ret;
   }
 }

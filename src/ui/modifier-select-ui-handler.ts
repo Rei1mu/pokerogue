@@ -392,7 +392,7 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
       onComplete: () => options.forEach(o => o.destroy())
     });
 
-    [this.rerollButtonContainer, this.transferButtonContainer, this.lockRarityButtonContainer].forEach(container => {
+    [ this.rerollButtonContainer, this.transferButtonContainer, this.lockRarityButtonContainer ].forEach(container => {
       if (container.visible) {
         this.scene.tweens.add({
           targets: container,
@@ -479,7 +479,7 @@ class ModifierOption extends Phaser.GameObjects.Container {
     this.add(this.itemText);
 
     if (this.modifierTypeOption.cost) {
-      this.itemCostText = addTextObject(this.scene, 0, 45, '', TextStyle.MONEY, { align: 'center' });
+      this.itemCostText = addTextObject(this.scene, 0, 45, "", TextStyle.MONEY, { align: "center" });
 
       this.itemCostText.setOrigin(0.5, 0);
       this.itemCostText.setAlpha(0);
@@ -558,8 +558,8 @@ class ModifierOption extends Phaser.GameObjects.Container {
       }
 
       if (!this.modifierTypeOption.cost) {
-        this.pb.setTexture('pb', `${this.getPbAtlasKey(0)}_open`);
-        (this.scene as BattleScene).playSound('pb_rel');
+        this.pb.setTexture("pb", `${this.getPbAtlasKey(0)}_open`);
+        (this.scene as BattleScene).playSound("pb_rel");
 
         this.scene.tweens.add({
           targets: this.pb,

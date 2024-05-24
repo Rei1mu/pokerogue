@@ -469,7 +469,7 @@ export default class SummaryUiHandler extends UiHandler {
           success = true;
         } else if (this.cursor === Page.PROFILE && this.pokemon.hasPassive()) {
           // if we're on the PROFILE page and this pokemon has a passive unlocked..
-          // Since abilities are displayed by default, all we need to do is toggle visibility on all elements to show passives 
+          // Since abilities are displayed by default, all we need to do is toggle visibility on all elements to show passives
           this.abilityContainer.nameText.setVisible(!this.abilityContainer.descriptionText.visible);
           this.abilityContainer.descriptionText.setVisible(!this.abilityContainer.descriptionText.visible);
           this.abilityContainer.labelImage.setVisible(!this.abilityContainer.labelImage.visible);
@@ -625,7 +625,7 @@ export default class SummaryUiHandler extends UiHandler {
             onComplete: () => {
               if (forward) {
                 this.populatePageContainer(this.summaryPageContainer);
-                if (this.cursor === Page.MOVES) {
+                if (this.cursor===Page.MOVES) {
                   this.moveCursorObj = null;
                   this.showMoveSelect();
                   this.showMoveEffect();

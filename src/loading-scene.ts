@@ -186,17 +186,17 @@ export class LoadingScene extends SceneBase {
     this.loadAtlas('tera_sparkle', 'effects');
     this.load.video('evo_bg', 'images/effects/evo_bg.mp4', true);
 
-    this.loadAtlas('pb', '');
-    this.loadAtlas('items', '');
-    this.loadAtlas('types', '');
-    this.loadAtlas('statuses', '');
-    this.loadAtlas('categories', '');
-    
-    this.loadAtlas('egg', 'egg');
-    this.loadAtlas('egg_crack', 'egg');
-    this.loadAtlas('egg_icons', 'egg');
-    this.loadAtlas('egg_shard', 'egg');
-    this.loadAtlas('egg_lightrays', 'egg');
+    this.loadAtlas("pb", "");
+    this.loadAtlas("items", "");
+    this.loadAtlas("types", "");
+    this.loadAtlas("statuses", "");
+    this.loadAtlas("categories", "");
+
+    this.loadAtlas("egg", "egg");
+    this.loadAtlas("egg_crack", "egg");
+    this.loadAtlas("egg_icons", "egg");
+    this.loadAtlas("egg_shard", "egg");
+    this.loadAtlas("egg_lightrays", "egg");
     Utils.getEnumKeys(GachaType).forEach(gt => {
       const key = gt.toLowerCase();
       this.loadImage(`gacha_${key}`, 'egg');
@@ -343,7 +343,7 @@ export class LoadingScene extends SceneBase {
     this.load.on("fileprogress", file => {
       assetText.setText(`Loading asset: ${file.key}`);
     });
-    
+
     loadingGraphics.push(bg, graphics, progressBar, progressBox, logo, percentText, assetText);
 
     if (!mobile)
