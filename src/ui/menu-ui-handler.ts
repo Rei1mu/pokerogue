@@ -9,7 +9,7 @@ import { OptionSelectConfig, OptionSelectItem } from "./abstact-option-select-ui
 import { Tutorial, handleTutorial } from "../tutorial";
 import { updateUserInfo } from "../account";
 import i18next from "../plugins/i18n";
-import {Button} from "../enums/buttons";
+import { Button } from "../enums/buttons";
 
 export enum MenuOptions {
   GAME_SETTINGS,
@@ -47,8 +47,8 @@ export default class MenuUiHandler extends MessageUiHandler {
     super(scene, mode);
 
     this.ignoredMenuOptions = !bypassLogin
-      ? [ ]
-      : [ MenuOptions.LOG_OUT ];
+      ? []
+      : [MenuOptions.LOG_OUT];
     this.menuOptions = Utils.getEnumKeys(MenuOptions).map(m => parseInt(MenuOptions[m]) as MenuOptions).filter(m => !this.ignoredMenuOptions.includes(m));
   }
 
@@ -99,7 +99,7 @@ export default class MenuUiHandler extends MessageUiHandler {
         const config: OptionSelectConfig = {
           options: new Array(5).fill(null).map((_, i) => i).filter(slotFilter).map(i => {
             return {
-              label: i18next.t("menuUiHandler:slot", {slotNumber: i+1}),
+              label: i18next.t("menuUiHandler:slot", { slotNumber: i + 1 }),
               handler: () => {
                 callback(i);
                 ui.revertMode();
@@ -121,7 +121,8 @@ export default class MenuUiHandler extends MessageUiHandler {
       });
     };
 
-    if (Utils.isLocal) {
+    // if (Utils.isLocal) {
+    if (true) {
       manageDataOptions.push({
         label: i18next.t("menuUiHandler:importSession"),
         handler: () => {
@@ -152,7 +153,8 @@ export default class MenuUiHandler extends MessageUiHandler {
       },
       keepOpen: true
     });
-    if (Utils.isLocal) {
+    // if (Utils.isLocal) {
+    if (true) {
       manageDataOptions.push({
         label: i18next.t("menuUiHandler:importData"),
         handler: () => {
