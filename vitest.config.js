@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => {
 			},
 		},
 		plugins: [/*fs()*/],
-		server: { host: '0.0.0.0', port: 8000 },
+		server: { host: '0.0.0.0', port: 8234 },
 		clearScreen: false,
 		build: {
 			minify: 'esbuild',

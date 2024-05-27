@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 export default defineConfig(({ mode }) => {
 	return {
 		plugins: [/*fs()*/],
-		server: { host: '0.0.0.0', port: 8000 },
+		server: { host: '0.0.0.0', port: 8234 },
 		clearScreen: false,
 		build: {
 			minify: 'esbuild',
